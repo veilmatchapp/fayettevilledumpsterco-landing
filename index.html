@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atlas Lead Co | Exclusive Local Lead Generation for Service Businesses</title>
+  <meta name="description" content="Atlas Lead Co delivers exclusive, high-intent local leads to service businesses across the USA. No shared pools. Month-to-month. Start your free 14-day trial.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://atlasleadco.com">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Atlas Lead Co | Exclusive Local Lead Generation">
+  <meta property="og:description" content="Stop buying shared leads. Atlas delivers exclusive, high-intent local customers to your business — not your competitors'.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://atlasleadco.com">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- THREE.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Atlas Lead Co",
+    "url": "https://atlasleadco.com",
+    "description": "Atlas Lead Co delivers exclusive, high-intent local leads to service businesses across the USA. No shared pools. Month-to-month. No contracts.",
+    "areaServed": "US",
+    "serviceType": "Lead Generation",
+    "offers": {
+      "@type": "Offer",
+      "name": "Exclusive Local Lead Generation",
+      "description": "Exclusive, real-time local leads for service businesses. Free 14-day trial.",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <!-- FAQ Schema (AEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Are the leads from Atlas Lead Co exclusive?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Atlas Lead Co delivers 100% exclusive leads — one business per market, per service category. We never sell the same lead to multiple competitors."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a contract with Atlas Lead Co?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Atlas Lead Co operates month-to-month with no contracts and no setup fees. You can cancel at any time."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the free trial work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We offer a free 14-day trial of real, exclusive leads in your service area. No credit card required. You'll see the actual volume and quality before spending a dollar."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080810;
+      --surface: #0D0D1C;
+      --surface-2: #131326;
+      --text: #EDECEA;
+      --text-muted: #6A6A88;
+      --gold: #C49A2E;
+      --gold-bright: #D4A853;
+      --gold-dim: rgba(196,154,46,0.09);
+      --gold-border: rgba(196,154,46,0.22);
+      --border: rgba(255,255,255,0.05);
+      --border-hover: rgba(255,255,255,0.09);
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body: 'Manrope', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+    }
+
+    /* ─── GRAIN ─── */
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9998;
+      opacity: 0.038;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 300px;
+    }
+
+    /* ─── CURSOR GLOW ─── */
+    #cursor-glow {
+      position: fixed;
+      width: 540px;
+      height: 540px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(196,154,46,0.048) 0%, transparent 65%);
+      transform: translate(-50%,-50%);
+      pointer-events: none;
+      z-index: 9997;
+      left: -999px;
+      top: -999px;
+      transition: left 0.12s ease, top 0.12s ease;
+    }
+
+    /* ─── SCROLL PROGRESS ─── */
+    #progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+      z-index: 200;
+      transition: width 0.06s linear;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 26px 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: padding 0.4s ease, background 0.4s ease, border-color 0.4s ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    nav.scrolled {
+      background: rgba(8,8,16,0.90);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom-color: var(--border);
+      padding: 17px 56px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .nav-logo-primary {
+      font-family: var(--font-display);
+      font-size: 21px;
+      letter-spacing: 0.15em;
+      color: var(--text);
+    }
+
+    .nav-logo-secondary {
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 0.40em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-top: 3px;
+    }
+
+    .nav-logo-img {
+      height: 42px;
+      width: auto;
+      display: block;
+      transition: opacity 0.2s ease, transform 0.35s cubic-bezier(0.16,1,0.3,1);
+      mix-blend-mode: lighten;
+    }
+    .nav-logo-img:hover {
+      opacity: 0.82;
+      transform: translateY(-1px);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 44px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      padding: 11px 26px;
+      background: var(--gold);
+      color: #080810;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .nav-cta:hover { background: var(--gold-bright); transform: translateY(-1px); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 55% 45%;
+      align-items: center;
+      padding: 0 56px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--gold-border) 38%, var(--gold-border) 62%, transparent 100%);
+    }
+
+    .hero-left {
+      padding-top: 95px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .eyebrow-line {
+      width: 38px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .eyebrow-text {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .hero-h1 {
+      font-family: var(--font-display);
+      font-size: clamp(62px, 8vw, 108px);
+      line-height: 0.88;
+      letter-spacing: 0.025em;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+
+    .hero-h1 .gold { color: var(--gold); }
+
+    .hero-sub {
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.74;
+      color: var(--text-muted);
+      max-width: 410px;
+      margin-bottom: 50px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .btn-primary {
+      padding: 15px 36px;
+      background: var(--gold);
+      color: #080810;
+      font-family: var(--font-body);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--gold-bright); transform: translateY(-1px); }
+
+    .btn-ghost {
+      padding: 15px 36px;
+      background: transparent;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+      display: inline-block;
+    }
+    .btn-ghost:hover { border-color: var(--gold-border); color: var(--text); }
+
+    .hero-right {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .canvas-wrapper {
+      position: relative;
+      width: 520px;
+      height: 520px;
+    }
+
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .canvas-glow {
+      position: absolute;
+      inset: -22%;
+      background: radial-gradient(circle, rgba(196,154,46,0.07) 0%, transparent 62%);
+      pointer-events: none;
+    }
+
+    /* ─── MARQUEE ─── */
+    .marquee-section {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 15px 0;
+      overflow: hidden;
+      background: var(--surface);
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee-run 32s linear infinite;
+    }
+
+    .marquee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      padding: 0 44px;
+      white-space: nowrap;
+    }
+
+    .marquee-stat {
+      font-family: var(--font-display);
+      font-size: 17px;
+      letter-spacing: 0.06em;
+      color: var(--gold);
+    }
+
+    .marquee-label {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .marquee-dot {
+      width: 4px;
+      height: 4px;
+      background: var(--gold-border);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    @keyframes marquee-run {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ─── SECTION BASE ─── */
+    section { padding: 110px 56px; position: relative; }
+
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .section-eyebrow-line {
+      width: 24px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .section-eyebrow-text {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .section-h2 {
+      font-family: var(--font-display);
+      font-size: clamp(44px, 5vw, 68px);
+      line-height: 0.96;
+      letter-spacing: 0.025em;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 15px;
+      line-height: 1.72;
+      color: var(--text-muted);
+      max-width: 520px;
+    }
+
+    /* ─── PROBLEM ─── */
+    .problem-section { background: var(--surface); }
+
+    .problem-statement {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 5.5vw, 74px);
+      line-height: 1.02;
+      letter-spacing: 0.025em;
+      color: var(--text);
+      max-width: 900px;
+      margin-bottom: 38px;
+    }
+
+    .problem-statement .gold { color: var(--gold); }
+
+    .problem-counter {
+      display: inline-flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 13.5px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    .problem-counter::before {
+      content: '';
+      display: block;
+      width: 44px;
+      height: 1px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* ─── HOW IT WORKS ─── */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin-top: 64px;
+    }
+
+    .step-card {
+      background: var(--bg);
+      padding: 54px 42px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: border-color 0.3s;
+      cursor: default;
+    }
+
+    .step-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .step-card:hover::before { transform: scaleX(1); }
+    .step-card:hover { border-color: var(--border-hover); }
+
+    .step-ghost {
+      font-family: var(--font-display);
+      font-size: 150px;
+      line-height: 1;
+      color: rgba(196,154,46,0.032);
+      position: absolute;
+      top: -16px; right: 8px;
+      letter-spacing: -0.02em;
+      user-select: none;
+      pointer-events: none;
+      transition: color 0.4s;
+    }
+
+    .step-card:hover .step-ghost { color: rgba(196,154,46,0.060); }
+
+    .step-bar {
+      width: 28px;
+      height: 2px;
+      background: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 27px;
+      letter-spacing: 0.06em;
+      color: var(--text);
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .step-body {
+      font-size: 13.5px;
+      font-weight: 400;
+      line-height: 1.80;
+      color: var(--text-muted);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ─── WHY ATLAS / BENTO ─── */
+    .why-section { background: var(--surface); }
+
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin-top: 64px;
+    }
+
+    .bento-card {
+      background: var(--bg);
+      padding: 46px 40px;
+      border: 1px solid var(--border);
+      transition: border-color 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bento-card:hover { border-color: var(--border-hover); }
+
+    .bento-card.s5 { grid-column: span 5; }
+    .bento-card.s7 { grid-column: span 7; }
+    .bento-card.s4 { grid-column: span 4; }
+
+    .bento-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 26px;
+      font-size: 18px;
+    }
+
+    .bento-stat {
+      font-family: var(--font-display);
+      font-size: 72px;
+      letter-spacing: 0.02em;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .bento-title {
+      font-family: var(--font-display);
+      font-size: 25px;
+      letter-spacing: 0.06em;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+
+    .bento-body {
+      font-size: 13.5px;
+      line-height: 1.74;
+      color: var(--text-muted);
+    }
+
+    /* ─── CONTACT ─── */
+    .contact-section::before {
+      content: 'A';
+      position: absolute;
+      font-family: var(--font-display);
+      font-size: 720px;
+      color: rgba(196,154,46,0.016);
+      right: -70px;
+      top: -130px;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .contact-inner {
+      max-width: 700px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .contact-h2 {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 6vw, 82px);
+      line-height: 0.92;
+      letter-spacing: 0.025em;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .contact-sub {
+      font-size: 15px;
+      line-height: 1.72;
+      color: var(--text-muted);
+      margin-bottom: 54px;
+      max-width: 520px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .form-field { display: flex; flex-direction: column; gap: 9px; }
+    .form-field.full { grid-column: span 2; }
+
+    .form-field label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .form-field input,
+    .form-field select {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 15px 18px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+      border-radius: 0;
+    }
+
+    .form-field input::placeholder { color: var(--text-muted); opacity: 0.42; }
+    .form-field input:focus,
+    .form-field select:focus { border-color: var(--gold-border); }
+    .form-field select option { background: #0D0D1C; }
+
+    .form-submit {
+      margin-top: 4px;
+      width: 100%;
+      padding: 17px;
+      background: var(--gold);
+      color: #080810;
+      font-family: var(--font-body);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .form-submit:hover { background: var(--gold-bright); transform: translateY(-1px); }
+
+    .success-state {
+      border: 1px solid var(--gold-border);
+      background: var(--gold-dim);
+      padding: 64px 52px;
+      display: none;
+    }
+
+    .success-state.visible { display: block; }
+
+    .success-state h3 {
+      font-family: var(--font-display);
+      font-size: 44px;
+      letter-spacing: 0.06em;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .success-state p {
+      font-size: 14px;
+      line-height: 1.72;
+      color: var(--text-muted);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 32px 56px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 15px;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 34px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-copy {
+      font-size: 10px;
+      color: var(--text-muted);
+      opacity: 0.42;
+      letter-spacing: 0.06em;
+    }
+
+    /* ─── REVEAL ANIMATIONS ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.78s cubic-bezier(0.16,1,0.3,1), transform 0.78s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.08s; }
+    .d2 { transition-delay: 0.18s; }
+    .d3 { transition-delay: 0.28s; }
+    .d4 { transition-delay: 0.38s; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 960px) {
+      nav { padding: 18px 24px; }
+      nav.scrolled { padding: 14px 24px; }
+      .nav-links { display: none; }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 130px 24px 64px;
+        min-height: unset;
+        gap: 48px;
+      }
+
+      .hero-left { padding-top: 0; }
+      .hero-right { justify-content: flex-start; }
+      .canvas-wrapper { width: 260px; height: 260px; }
+
+      section { padding: 72px 24px; }
+
+      .steps-grid { grid-template-columns: 1fr; }
+
+      .bento-grid { grid-template-columns: 1fr; }
+      .bento-card.s5,
+      .bento-card.s7,
+      .bento-card.s4 { grid-column: span 1; }
+
+      .form-grid { grid-template-columns: 1fr; }
+      .form-field.full { grid-column: span 1; }
+
+      footer {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+        padding: 28px 24px;
+      }
+
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Grain texture overlay -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- Cursor glow -->
+<div id="cursor-glow" aria-hidden="true"></div>
+
+<!-- Scroll progress bar -->
+<div id="progress" aria-hidden="true"></div>
+
+<!-- ═══ NAV ═══ -->
+<nav id="main-nav">
+  <a href="#" class="nav-logo" aria-label="Atlas Lead Co">
+    <img src="atlas-logo.png" alt="Atlas Lead Co" class="nav-logo-img">
+  </a>
+
+  <ul class="nav-links" role="list">
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#why">Why Atlas</a></li>
+    <li><a href="#contact">Free Trial</a></li>
+  </ul>
+
+  <a href="#contact" class="nav-cta">Start Free Trial</a>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="home" aria-label="Hero">
+  <div class="hero-left">
+    <div class="eyebrow">
+      <div class="eyebrow-line" aria-hidden="true"></div>
+      <span class="eyebrow-text">Exclusive Lead Generation · USA</span>
+    </div>
+
+    <h1 class="hero-h1">
+      STOP BUYING<br>
+      <span class="gold">SHARED</span><br>
+      LEADS.
+    </h1>
+
+    <p class="hero-sub">
+      Atlas delivers exclusive, high-intent local customers directly to your business — not your competitors'. Month-to-month. No setup fees. No contracts.
+    </p>
+
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">Start Free Trial</a>
+      <a href="#how" class="btn-ghost">See How It Works</a>
+    </div>
+  </div>
+
+  <div class="hero-right" aria-hidden="true">
+    <div class="canvas-wrapper">
+      <div class="canvas-glow"></div>
+      <canvas id="hero-canvas"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MARQUEE ═══ -->
+<div class="marquee-section" aria-hidden="true" role="presentation">
+  <div class="marquee-track">
+    <div class="marquee-item"><span class="marquee-stat">200+</span><span class="marquee-label">Markets Covered</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span class="marquee-stat">14-Day</span><span class="marquee-label">Free Trial</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span class="marquee-stat">100%</span><span class="marquee-label">Exclusive Leads</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span class="marquee-stat">$0</span><span class="marquee-label">Setup Fee</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span class="marquee-stat">Month-to-Month</span><span class="marquee-label">No Contracts</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span class="marquee-stat">24hr</span><span class="marquee-label">Avg Response Time</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span class="marquee-stat">200+</span><span class="marquee-label">Markets Covered</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span class="marquee-stat">14-Day</span><span class="marquee-label">Free Trial</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span class="marquee-stat">100%</span><span class="marquee-label">Exclusive Leads</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span class="marquee-stat">$0</span><span class="marquee-label">Setup Fee</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span class="marquee-stat">Month-to-Month</span><span class="marquee-label">No Contracts</span><div class="marquee-dot"></div></div>
+    <div class="marquee-item"><span class="marquee-stat">24hr</span><span class="marquee-label">Avg Response Time</span><div class="marquee-dot"></div></div>
+  </div>
+</div>
+
+<!-- ═══ PROBLEM ═══ -->
+<section class="problem-section" id="problem" aria-label="The Problem">
+  <div class="section-eyebrow reveal">
+    <div class="section-eyebrow-line" aria-hidden="true"></div>
+    <span class="section-eyebrow-text">The Problem</span>
+  </div>
+
+  <p class="problem-statement reveal d1">
+    Angi, Thumbtack, and HomeAdvisor are selling your next customer to <span class="gold">5 of your competitors</span> at the exact same moment.
+  </p>
+
+  <p class="problem-counter reveal d2">
+    Atlas doesn't work that way.
+  </p>
+</section>
+
+<!-- ═══ HOW IT WORKS ═══ -->
+<section id="how" aria-label="How It Works">
+  <div class="section-eyebrow reveal">
+    <div class="section-eyebrow-line" aria-hidden="true"></div>
+    <span class="section-eyebrow-text">How It Works</span>
+  </div>
+  <h2 class="section-h2 reveal d1">THREE STEPS.<br>REAL RESULTS.</h2>
+  <p class="section-sub reveal d2">We handle the digital heavy lifting. You focus on closing jobs and collecting payments.</p>
+
+  <div class="steps-grid">
+    <article class="step-card reveal d1">
+      <div class="step-ghost" aria-hidden="true">01</div>
+      <div class="step-bar" aria-hidden="true"></div>
+      <h3 class="step-title">WE MAP THE DEMAND</h3>
+      <p class="step-body">We identify high-intent searches in your service category and city — customers who are actively looking to hire right now, not just browsing.</p>
+    </article>
+
+    <article class="step-card reveal d2">
+      <div class="step-ghost" aria-hidden="true">02</div>
+      <div class="step-bar" aria-hidden="true"></div>
+      <h3 class="step-title">WE CAPTURE THE LEADS</h3>
+      <p class="step-body">Our digital infrastructure intercepts ready-to-buy customers before they ever reach your competitors. Verified intent. Real-time delivery.</p>
+    </article>
+
+    <article class="step-card reveal d3">
+      <div class="step-ghost" aria-hidden="true">03</div>
+      <div class="step-bar" aria-hidden="true"></div>
+      <h3 class="step-title">YOU GET THE JOBS</h3>
+      <p class="step-body">Leads forward directly to you — and only you. One business per market, per category. You answer the phone. You close the deal. You grow.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ═══ WHY ATLAS ═══ -->
+<section class="why-section" id="why" aria-label="Why Atlas">
+  <div class="section-eyebrow reveal">
+    <div class="section-eyebrow-line" aria-hidden="true"></div>
+    <span class="section-eyebrow-text">Why Atlas</span>
+  </div>
+  <h2 class="section-h2 reveal d1">BUILT DIFFERENT.<br>BY DESIGN.</h2>
+
+  <div class="bento-grid">
+    <article class="bento-card s5 reveal d1">
+      <div class="bento-icon" aria-hidden="true">◈</div>
+      <h3 class="bento-title">100% EXCLUSIVE</h3>
+      <p class="bento-body">One business per market. When you're our client in your city, no competitor ever gets those same leads. We never sell a lead twice — to anyone.</p>
+    </article>
+
+    <article class="bento-card s7 reveal d2">
+      <div class="bento-stat" aria-label="200 plus">200+</div>
+      <h3 class="bento-title">MARKETS NATIONWIDE</h3>
+      <p class="bento-body">We've built lead capture infrastructure across cities coast to coast. Wherever your customers are searching, we're already positioned to intercept them before your competitors do.</p>
+    </article>
+
+    <article class="bento-card s4 reveal d1">
+      <div class="bento-icon" aria-hidden="true">↻</div>
+      <h3 class="bento-title">NO CONTRACTS</h3>
+      <p class="bento-body">Month-to-month. Cancel any time. We earn your business every single month — and we're completely fine with that pressure.</p>
+    </article>
+
+    <article class="bento-card s4 reveal d2">
+      <div class="bento-icon" aria-hidden="true">◇</div>
+      <h3 class="bento-title">FREE 14-DAY TRIAL</h3>
+      <p class="bento-body">Real leads. Real volume. No card required. See exactly what you're getting before spending a single dollar.</p>
+    </article>
+
+    <article class="bento-card s4 reveal d3">
+      <div class="bento-icon" aria-hidden="true">△</div>
+      <h3 class="bento-title">VERIFIED INTENT</h3>
+      <p class="bento-body">Every lead is a real person actively searching for your service right now — not cold outreach, not recycled data. Live demand, delivered.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section class="contact-section" id="contact" aria-label="Get Started">
+  <div class="contact-inner">
+    <div class="section-eyebrow reveal">
+      <div class="section-eyebrow-line" aria-hidden="true"></div>
+      <span class="section-eyebrow-text">Get Started</span>
+    </div>
+
+    <h2 class="contact-h2 reveal d1">READY TO OWN<br>YOUR MARKET?</h2>
+
+    <p class="contact-sub reveal d2">
+      Tell us your service and city. We'll check availability and deliver real, exclusive leads — free for 14 days. No card. No commitment.
+    </p>
+
+    <!-- Success state -->
+    <div id="success-state" class="success-state" role="alert" aria-live="polite">
+      <h3>REQUEST RECEIVED</h3>
+      <p>We'll review your market and reach out within 24 hours with availability and your next steps.</p>
+    </div>
+
+    <!-- Contact form — replace YOUR_FORM_ID with Formspree endpoint -->
+    <form
+      id="contact-form"
+      action="https://formspree.io/f/YOUR_FORM_ID"
+      method="POST"
+      class="reveal d3"
+      novalidate
+    >
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="John Smith" required autocomplete="name">
+        </div>
+
+        <div class="form-field">
+          <label for="service">Service Type</label>
+          <select id="service" name="service" required>
+            <option value="" disabled selected>Select your service...</option>
+            <option>Junk Removal</option>
+            <option>Window Tinting</option>
+            <option>Roofing</option>
+            <option>HVAC</option>
+            <option>Plumbing</option>
+            <option>Tree Service</option>
+            <option>Pressure Washing</option>
+            <option>Moving Services</option>
+            <option>Landscaping</option>
+            <option>Painting</option>
+            <option>Electrician</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="city">City &amp; State</label>
+          <input type="text" id="city" name="city" placeholder="Detroit, MI" required autocomplete="address-level2">
+        </div>
+
+        <div class="form-field">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" required autocomplete="tel">
+        </div>
+
+        <div class="form-field full">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="john@yourbusiness.com" required autocomplete="email">
+        </div>
+      </div>
+
+      <button type="submit" class="form-submit">Check Market Availability →</button>
+    </form>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-logo">ATLAS LEAD CO</div>
+  <ul class="footer-links" role="list">
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#why">Why Atlas</a></li>
+    <li><a href="#contact">Free Trial</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 Atlas Lead Co. All rights reserved.<br>Atlas Lead Co is a trade name of Atlas Lead Group LLC.</div>
+</footer>
+
+<script>
+(function() {
+  'use strict';
+
+  // ── CURSOR GLOW ──
+  const glow = document.getElementById('cursor-glow');
+  document.addEventListener('mousemove', function(e) {
+    glow.style.left = e.clientX + 'px';
+    glow.style.top  = e.clientY + 'px';
+  });
+
+  // ── SCROLL: NAV + PROGRESS ──
+  const nav      = document.getElementById('main-nav');
+  const progress = document.getElementById('progress');
+
+  window.addEventListener('scroll', function() {
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+    var pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    progress.style.width = Math.min(pct, 100) + '%';
+  }, { passive: true });
+
+  // ── SCROLL REVEAL ──
+  var revealEls = document.querySelectorAll('.reveal');
+  var revealObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(function(el) { revealObs.observe(el); });
+
+  // ── CONTACT FORM ──
+  var form         = document.getElementById('contact-form');
+  var successState = document.getElementById('success-state');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var btn = form.querySelector('.form-submit');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    try {
+      var res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        form.style.display = 'none';
+        successState.classList.add('visible');
+      } else {
+        btn.textContent = 'Check Market Availability →';
+        btn.disabled = false;
+      }
+    } catch (_) {
+      // Demo mode fallback
+      form.style.display = 'none';
+      successState.classList.add('visible');
+    }
+  });
+
+  // ── THREE.JS GLOBE ──
+  if (typeof THREE === 'undefined') return;
+
+  var canvas  = document.getElementById('hero-canvas');
+  var wrapper = canvas.parentElement;
+  var size    = Math.min(wrapper.offsetWidth || 520, 520);
+
+  var scene    = new THREE.Scene();
+  var camera   = new THREE.PerspectiveCamera(52, 1, 0.1, 100);
+  camera.position.z = 2.85;
+
+  var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+  renderer.setSize(size, size);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  // Group — handles mouse tilt
+  var group = new THREE.Group();
+  scene.add(group);
+
+  // Outer wireframe sphere
+  var geoOuter   = new THREE.IcosahedronGeometry(1, 5);
+  var edgeOuter  = new THREE.EdgesGeometry(geoOuter);
+  var matOuter   = new THREE.LineBasicMaterial({ color: 0xC49A2E, transparent: true, opacity: 0.15 });
+  var outerMesh  = new THREE.LineSegments(edgeOuter, matOuter);
+  group.add(outerMesh);
+
+  // Inner wireframe sphere (counter-rotates)
+  var geoInner   = new THREE.IcosahedronGeometry(0.60, 3);
+  var edgeInner  = new THREE.EdgesGeometry(geoInner);
+  var matInner   = new THREE.LineBasicMaterial({ color: 0xD4A853, transparent: true, opacity: 0.26 });
+  var innerMesh  = new THREE.LineSegments(edgeInner, matInner);
+  group.add(innerMesh);
+
+  // Vertex points on outer sphere
+  var matPts = new THREE.PointsMaterial({ color: 0xD4A853, size: 0.013, transparent: true, opacity: 1.0 });
+  var pts    = new THREE.Points(geoOuter, matPts);
+  group.add(pts);
+
+  // Mouse tilt state
+  var tgtX = 0, tgtY = 0, curX = 0, curY = 0;
+
+  window.addEventListener('mousemove', function(e) {
+    tgtX = (e.clientY / window.innerHeight - 0.5) * 0.44;
+    tgtY = (e.clientX / window.innerWidth  - 0.5) * 0.44;
+  }, { passive: true });
+
+  var raf;
+  function animate() {
+    raf = requestAnimationFrame(animate);
+
+    // Individual rotations
+    outerMesh.rotation.y += 0.0022;
+    outerMesh.rotation.x += 0.0008;
+    innerMesh.rotation.y -= 0.0040;
+    innerMesh.rotation.x -= 0.0014;
+    pts.rotation.y       += 0.0022;
+
+    // Mouse tilt on group
+    curX += (tgtX - curX) * 0.038;
+    curY += (tgtY - curY) * 0.038;
+    group.rotation.x = curX;
+    group.rotation.y = curY;
+
+    renderer.render(scene, camera);
+  }
+
+  animate();
+
+  window.addEventListener('beforeunload', function() {
+    cancelAnimationFrame(raf);
+    renderer.dispose();
+  });
+
+})();
+</script>
+
+</body>
+</html>
